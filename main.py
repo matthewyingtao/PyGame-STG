@@ -57,7 +57,8 @@ def draw():
     for sprite in all_sprites.sprites():
         screen.blit(sprite.image, sprite.rect)
     if player.alive():
-        player_animation.blit(screen, (player.rect.left - 13, player.rect.top - 3))
+        player_animation.blit(
+            screen, (player.rect.left - 13, player.rect.top - 3))
     if show_fps:
         screen.blit(update_fps(), (10, 0))
     screen.blit(score, score_rect)
@@ -127,7 +128,8 @@ class Player(pygame.sprite.Sprite):
 class Asteroid(pygame.sprite.Sprite):
     def __init__(self):
         super(Asteroid, self).__init__(asteroids, all_sprites)
-        self.image = pygame.image.load(asteroid_images[random.randint(0, 2)]).convert()
+        self.image = pygame.image.load(
+            asteroid_images[random.randint(0, 2)]).convert()
         self.image.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.image.get_rect(
             center=(random.randint(0, screen_width), 0))
@@ -145,7 +147,8 @@ class Asteroid(pygame.sprite.Sprite):
 class Star(pygame.sprite.Sprite):
     def __init__(self):
         super(Star, self).__init__(stars, all_sprites)
-        self.image = pygame.image.load(star_images[random.randint(0, 3)]).convert_alpha()
+        self.image = pygame.image.load(
+            star_images[random.randint(0, 3)]).convert_alpha()
         self.image.set_colorkey((255, 255, 255), RLEACCEL)
         self.size = self.image.get_rect()[2], self.image.get_rect()[3]
         self.side = random.choice([True, False])
@@ -200,9 +203,12 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (
 
 player_image = resource_path("assets/images/empty.png")
 player_animation = pyganim.PygAnimation([(resource_path("assets/images/rocket.png"), 100),
-                                         (resource_path("assets/images/rocket1.png"), 100),
-                                         (resource_path("assets/images/rocket2.png"), 100),
-                                         (resource_path("assets/images/rocket3.png"), 100),
+                                         (resource_path(
+                                             "assets/images/rocket1.png"), 100),
+                                         (resource_path(
+                                             "assets/images/rocket2.png"), 100),
+                                         (resource_path(
+                                             "assets/images/rocket3.png"), 100),
                                          (resource_path("assets/images/rocket4.png"), 100)])
 player_animation.play()
 
@@ -218,9 +224,11 @@ program_icon = pygame.image.load(resource_path("assets/images/rocket.png"))
 pygame.display.set_icon(program_icon)
 pygame.display.set_caption("Touhou 69")
 
-screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | HWSURFACE)
+screen = pygame.display.set_mode(
+    (screen_width, screen_height), DOUBLEBUF | HWSURFACE)
 
-score_font = pygame.font.Font(resource_path("assets/fonts/Audiowide-Regular.ttf"), 40)
+score_font = pygame.font.Font(resource_path(
+    "assets/fonts/Audiowide-Regular.ttf"), 40)
 score = score_font.render(f"Score: 0", True, (255, 255, 255))
 score_rect = score.get_rect()
 score_rect.center = (screen_width_half, 20)
@@ -267,7 +275,8 @@ while running:
         elif event.type == GAME_TIME:
             difficulty_time += 0.1
             difficulty_log = (difficulty_time * 10) - 10
-            difficulty_log = (500 * (difficulty_log ** 2)) / ((difficulty_log ** 2) + (10 * difficulty_log))
+            difficulty_log = (500 * (difficulty_log ** 2)) / \
+                ((difficulty_log ** 2) + (10 * difficulty_log))
             pygame.time.set_timer(ADDASTEROID, int(600 - difficulty_log))
 
     score = score_font.render(f"Score: {player.score}", True, (255, 255, 255))
