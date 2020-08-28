@@ -221,7 +221,7 @@ pygame.display.set_caption("Touhou 69")
 screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | HWSURFACE)
 
 score_font = pygame.font.Font(resource_path("assets/fonts/Audiowide-Regular.ttf"), 40)
-score = score_font.render(f"Score: 0", True, (255, 255, 255))
+score = score_font.render("Score: 0", True, (255, 255, 255))
 score_rect = score.get_rect()
 score_rect.center = (screen_width_half, 20)
 
